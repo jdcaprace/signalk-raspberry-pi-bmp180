@@ -1,0 +1,22 @@
+{
+  "name": "signalk-raspberry-pi-bmp180",
+  "author": "Jean-David Caprace",
+  "description": "SignalK node server plugin that reads data from bmp180 temperature/barometer sensors on Raspberry-Pi",
+  "license": "MIT",
+  "homepage": "https://github.com/jdcaprace/signalk-raspberry-pi-bmp180#readme",
+  "version": "0.0.1",
+  "main": "index.js",
+  "keywords": [
+    "signalk-node-server-plugin"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jdcaprace/signalk-raspberry-pi-bmp180.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jdcaprace/signalk-raspberry-pi-bmp180/issues"
+  },
+  "dependencies": {
+    "bmp180-sensor": "1.1.0"
+  }
+}
