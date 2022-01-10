@@ -28,7 +28,7 @@ module.exports = function (app) {
         description: 'This is used to build the path in Signal K. It will be appended to \'environment\'',
         default: 'inside.engineroom' 
 		    //https://signalk.org/specification/1.5.0/doc/vesselsBranch.html
-		    //environment/inside/temperature [Units: K (Kelvin)]  and    environment/inside/pressure [Units: Pa (Pascal)]
+		    //environment/inside/temperature [Units: K (Kelvin)]  and environment/inside/pressure [Units: Pa (Pascal)]
       },
       i2c_bus: {
         type: 'integer',
@@ -42,7 +42,8 @@ module.exports = function (app) {
       },
       mode: {
         type: 'integer',
-        title: 'Sensor mode [0, 1, 2, 3], see docs.', // 0: ultra low power, 1: standard, 2: high resolution, 3: ultra high resolution.
+        title: 'Sensor mode [0, 1, 2, 3]',
+        description: '0: ultra low power, 1: standard, 2: high resolution, 3: ultra high resolution.',
         default: 1,
       },
     }
@@ -94,7 +95,7 @@ module.exports = function (app) {
 		    // Therefore: environment/inside/temperature [Units: K (Kelvin)] and environment/inside/pressure [Units: Pa (Pascal)]
         temperature = data.temperature + 273.15;
         pressure = data.pressure;
-        console.log(`data = ${JSON.stringify(data, null, 2)}`);
+        //console.log(`data = ${JSON.stringify(data, null, 2)}`);
 		    //console.log(data)
         
         // create message

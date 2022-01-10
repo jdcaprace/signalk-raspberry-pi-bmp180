@@ -1,7 +1,5 @@
 
 # signalk-raspberry-pi-bmp180
-UNDER TEST!
-
 bmp180 temperature and pressure sensor information for SignalK (SK).
 
 This plugin can be downloaded via the SignalK application.
@@ -15,6 +13,8 @@ You will need a raspberry pi with SignalK installed along with a bmp180 sensor.
 Personally I am using the sensor found at the following link on Amazon. However there are many manufacturers to pick from.
 HiLetgo bmp180 Environmental Sensor Sensing Environmental Temperature and barometric Pressure for Raspberry Pi Arduino STM32 I2C and SPI Interfaces
 by Bosch.
+
+![bmp180](../main/Pictures/bmp180.png)
 
 Learn more: https://www.amazon.com/HiLetgo-Digital-Barometric-Pressure-Replace/dp/B01F527EXS/
 
