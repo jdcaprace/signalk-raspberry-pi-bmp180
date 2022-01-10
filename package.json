@@ -17,7 +17,7 @@
     "url": "https://github.com/jdcaprace/signalk-raspberry-pi-bmp180/issues"
   },
   "dependencies": {
-    "bmp180-sensor": "1.1.0"
+    "bmp180-sensor": "^1.1.0"
   },
   "scripts": {
     "test": "echo \"No test specified\""

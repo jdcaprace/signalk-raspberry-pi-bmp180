@@ -12,7 +12,7 @@ module.exports = function (app) {
 
   plugin.id = 'signalk-raspberry-pi-bmp180'
   plugin.name = 'Raspberry-Pi bmp180'
-  plugin.description = 'bmp180 temperature and pressure sensor on Raspberry-Pi'
+  plugin.description = 'bmp180 i2c temperature and pressure sensor on Raspberry-Pi'
 
   plugin.schema = {
     type: 'object',
@@ -39,6 +39,11 @@ module.exports = function (app) {
         type: 'string',
         title: 'I2C address',
         default: '0x77',
+      },
+      mode: {
+        type: 'integer',
+        title: 'Sensor mode [0, 1, 2, 3], see docs.', // 0: ultra low power, 1: standard, 2: high resolution, 3: ultra high resolution.
+        default: 1,
       },
     }
   }
@@ -76,7 +81,7 @@ module.exports = function (app) {
     const bmpoptions = {
         bus : options.i2c_bus || 1, // defaults to 1
       	address : Number(options.i2c_address || '0x77'), // defaults to 0x77
-		    mode : 1, // defaults to 1 for bmp180
+		    mode : options.mode || 1, // defaults to 1 for bmp180
 	  };
 
 	  // Read bmp180 sensor data
@@ -95,7 +100,7 @@ module.exports = function (app) {
         // create message
         var delta = createDeltaMessage(temperature, pressure)
         
-        // send temperature
+        // send data
         app.handleMessage(plugin.id, delta)		
 	
         //close sensor
@@ -106,14 +111,9 @@ module.exports = function (app) {
       });
     }
 
-    bmp180.calibrate()
-        .then(() => {
-      console.log('bmp180 initialization succeeded');
-      readSensorData();
-    })
-    .catch((err) => console.error(`bmp180 initialization failed: ${err} `));
-
-    timer = setInterval(readSensorData, options.rate * 1000);
+    //readbmp180();
+    
+    timer = setInterval(readbmp180, options.rate * 1000);
   }
 
   plugin.stop = function () {
@@ -125,3 +125,5 @@ module.exports = function (app) {
 
   return plugin
 }
+
+
