@@ -1,7 +1,9 @@
+
 # signalk-raspberry-pi-bmp180
 UNDER TEST!
 bmp180 temperature and pressure sensor information for SignalK (SK).
 This plugin can be downloaded via the SignalK application.
+This plugin has been inspired by the plugin "signalk-raspberry-pi-bme280" developped by Jeremy Carter.
 
 ## Getting Started
 You will need a raspberry pi with SignalK installed along with a bmp180 sensor.

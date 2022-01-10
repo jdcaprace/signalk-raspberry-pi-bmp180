@@ -27,8 +27,8 @@ module.exports = function (app) {
         title: 'SignalK Path',
         description: 'This is used to build the path in Signal K. It will be appended to \'environment\'',
         default: 'inside.engineroom' 
-		//https://signalk.org/specification/1.5.0/doc/vesselsBranch.html
-		//environment/inside/temperature [Units: K (Kelvin)]  and    environment/inside/pressure [Units: Pa (Pascal)]
+		    //https://signalk.org/specification/1.5.0/doc/vesselsBranch.html
+		    //environment/inside/temperature [Units: K (Kelvin)]  and    environment/inside/pressure [Units: Pa (Pascal)]
       },
       i2c_bus: {
         type: 'integer',
@@ -76,7 +76,7 @@ module.exports = function (app) {
     const bmpoptions = {
         bus : options.i2c_bus || 1, // defaults to 1
       	address : Number(options.i2c_address || '0x77'), // defaults to 0x77
-		    mode : 1, // defaults to 1
+		    mode : 1, // defaults to 1 for bmp180
 	  };
 
 	  // Read bmp180 sensor data
@@ -84,18 +84,24 @@ module.exports = function (app) {
 		  const sensor = await bmp180(bmpoptions)
 		  const data = await sensor.read()
 		    // temperature_C, pressure_Pa are returned by default for bmp180.
-        //https://signalk.org/specification/1.5.0/doc/vesselsBranch.html
-		    //environment/inside/temperature [Units: K (Kelvin)]  and    environment/inside/pressure [Units: Pa (Pascal)]
+        // The standard path for Signal K is available here:
+        // https://signalk.org/specification/1.5.0/doc/vesselsBranch.html
+		    // Therefore: environment/inside/temperature [Units: K (Kelvin)] and environment/inside/pressure [Units: Pa (Pascal)]
         temperature = data.temperature + 273.15;
         pressure = data.pressure;
-		    // console.log(data)
+        console.log(`data = ${JSON.stringify(data, null, 2)}`);
+		    //console.log(data)
         
         // create message
         var delta = createDeltaMessage(temperature, pressure)
+        
         // send temperature
         app.handleMessage(plugin.id, delta)		
 	
-      .catch((err) => {
+        //close sensor
+        await sensor.close()
+
+        .catch((err) => {
       console.log(`bmp180 read error: ${err}`);
       });
     }
